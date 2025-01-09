@@ -98,101 +98,130 @@ export default function Home() {
     // console.log(movie);
   }
   return (
-    <div>
-      <div className="one">
-        <label>Name</label>
-        <input
-          onChange={(e) => {
-            setName(e.target.value);
-            console.log(name);
-          }}
-          required
-          className="border-border border"
-          type="text"
-          aria-label="Name"
-        />
-        <label>Your Rating</label>
-        <input
-          onChange={(e) => {
-            setRating(Number(e.target.value));
-          }}
-          className="border-border border"
-          type="number"
-          aria-label="ID"
-          required
-        />
-        <button
-          onClick={() => {
-            submit();
-          }}>
-          Submit
-        </button>
-      </div>
-      <div className="two ">
-        <input
-          // value={change}
-          className="border-border border m-7"
-          onChange={(e) => setChange(e.target.value)}
-        />
-        {movies.map((movie) => (
-          <div key={movie.id} className="p-7 flex gap-6">
-            <div>{movie.name}</div>
-            <div>{movie.id}</div>
-
-            {/* <label htmlFor="name">edit</label> */}
+    <div className="justify-self-center content-center min-h-screen">
+      <div className="flex flex-col w-[400px]">
+        <div className="one ">
+          <h1 className="text-secondary text-lg font-bold">Create</h1>
+          <div className="flex flex-col items-center">
+            <label className="text-secondary">Name</label>
+            <input
+              onChange={(e) => {
+                setName(e.target.value);
+                console.log(name);
+              }}
+              required
+              className="border-border border w-1/2"
+              type="text"
+              aria-label="Name"
+            />
+          </div>
+          <div className="flex flex-col items-center">
+            <label className="text-secondary">Your Rating</label>
+            <input
+              onChange={(e) => {
+                setRating(Number(e.target.value));
+              }}
+              className="border-border border w-1/2"
+              type="number"
+              aria-label="ID"
+              required
+            />
+          </div>
+          <div className="justify-self-center">
             <button
+              className="text-secondary text-center "
               onClick={() => {
-                deletebutton(movie.id);
-                console.log(movie.id);
-              }}>
-              delete
-            </button>
-            <button
-              onClick={() => {
-                editSubmit(movie.id);
+                submit();
               }}>
               Submit
             </button>
           </div>
-        ))}
-        <div>
-          <h3>Find Movie</h3>
-          <div>
+        </div>
+        <div className="two ">
+          <h1 className="text-secondary text-lg font-bold">Edit</h1>
+          <div className="flex flex-col items-center">
             <input
-              type="number"
-              onChange={(e) => {
-                setFindMovie(Number(e.target.value));
-                console.log(findMovie);
-              }}
+              // value={change}
+              className="border-border border"
+              onChange={(e) => setChange(e.target.value)}
             />
-            <button
-              onClick={() => {
-                findOneButton(findMovie);
-                console.log(findMovie);
-              }}>
-              Submit
-            </button>
-            <Suspense>
-              <div key={movie?.id} className="p-7 flex gap-6">
-                <div>{movie?.name ? movie?.name : <p>not found</p>}</div>
-                <div>{movie?.id ? movie?.id : <p>not found</p>}</div>
+          </div>
+          <form>
+            {movies.map((movie) => (
+              <div key={movie.id} className="p-7 flex gap-6">
+                <input
+                  className="text-secondary"
+                  type="text"
+                  name="movie-name"
+                  value={movie.name}
+                />
+                <div className="text-secondary">{movie.id}</div>
 
                 {/* <label htmlFor="name">edit</label> */}
                 <button
+                  className="text-secondary"
                   onClick={() => {
-                    // deletebutton(movie?.id);
-                    // console.log(movie?.id);
+                    deletebutton(movie.id);
+                    console.log(movie.id);
                   }}>
                   delete
                 </button>
                 <button
+                  className="text-secondary"
                   onClick={() => {
-                    editSubmit(Number(movie?.id));
+                    editSubmit(movie.id);
                   }}>
                   Submit
                 </button>
               </div>
-            </Suspense>
+            ))}
+          </form>
+          <div>
+            <div>
+              <h1 className="text-secondary text-lg font-bold">Find Movie</h1>
+              <div>
+                <input
+                  type="number"
+                  onChange={(e) => {
+                    setFindMovie(Number(e.target.value));
+                    console.log(findMovie);
+                  }}
+                />
+                <button
+                  className="text-secondary"
+                  onClick={() => {
+                    findOneButton(findMovie);
+                    console.log(findMovie);
+                  }}>
+                  Submit
+                </button>
+                <Suspense>
+                  <div key={movie?.id} className="p-7 flex gap-6">
+                    <div className="text-secondary">
+                      {movie?.name ? movie?.name : <p>not found</p>}
+                    </div>
+                    <div className="text-secondary">
+                      {movie?.id ? movie?.id : <p>not found</p>}
+                    </div>
+
+                    {/* <label htmlFor="name">edit</label> */}
+                    <button
+                      onClick={() => {
+                        // deletebutton(movie?.id);
+                        // console.log(movie?.id);
+                      }}>
+                      delete
+                    </button>
+                    <button
+                      onClick={() => {
+                        editSubmit(Number(movie?.id));
+                      }}>
+                      Submit
+                    </button>
+                  </div>
+                </Suspense>
+              </div>
+            </div>
           </div>
         </div>
       </div>
