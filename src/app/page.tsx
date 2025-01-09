@@ -10,7 +10,7 @@ type movie = {
 export default function Home() {
   const [movies, setMovies] = useState<movie[]>([]);
   const [name, setName] = useState<string>("");
-  const [rating, setRating] = useState<number>();
+  const [rating, setRating] = useState<number>(0);
   const [change, setChange] = useState<string>("");
   const [movie, setMovie] = useState<movie>();
   const [findMovie, setFindMovie] = useState<number>(0);
@@ -81,7 +81,6 @@ export default function Home() {
       {
         method: "GET",
         headers: {
-          Accept: "application/json",
           "Content-Type": "application/json",
         },
       }
@@ -110,7 +109,7 @@ export default function Home() {
                 console.log(name);
               }}
               required
-              className="border-border border w-1/2"
+              className="border-border border w-1/2 text-secondary border-border rounded-md p-2"
               type="text"
               aria-label="Name"
             />
@@ -121,7 +120,7 @@ export default function Home() {
               onChange={(e) => {
                 setRating(Number(e.target.value));
               }}
-              className="border-border border w-1/2"
+              className="text-secondary border border-border rounded-md p-2 w-1/2"
               type="number"
               aria-label="ID"
               required
@@ -139,23 +138,19 @@ export default function Home() {
         </div>
         <div className="two ">
           <h1 className="text-secondary text-lg font-bold">Edit</h1>
-          <div className="flex flex-col items-center">
-            <input
-              // value={change}
-              className="border-border border"
-              onChange={(e) => setChange(e.target.value)}
-            />
-          </div>
+
           <form>
             {movies.map((movie) => (
               <div key={movie.id} className="p-7 flex gap-6">
                 <input
-                  className="text-secondary"
+                  className="text-secondary border border-border rounded-md p-2"
                   type="text"
+                  onChange={(e) => setChange(e.target.value)}
                   name="movie-name"
-                  value={movie.name}
+                  defaultValue={movie.name}
+                  // value={movie.name}
                 />
-                <div className="text-secondary">{movie.id}</div>
+                {/* <div className="text-secondary">{movie.id}</div> */}
 
                 {/* <label htmlFor="name">edit</label> */}
                 <button
@@ -181,6 +176,7 @@ export default function Home() {
               <h1 className="text-secondary text-lg font-bold">Find Movie</h1>
               <div>
                 <input
+                  className="text-secondary border border-border rounded-md p-2"
                   type="number"
                   onChange={(e) => {
                     setFindMovie(Number(e.target.value));
@@ -207,8 +203,8 @@ export default function Home() {
                     {/* <label htmlFor="name">edit</label> */}
                     <button
                       onClick={() => {
-                        // deletebutton(movie?.id);
-                        // console.log(movie?.id);
+                        deletebutton(Number(movie?.id));
+                        console.log(movie?.id);
                       }}>
                       delete
                     </button>
